@@ -175,6 +175,13 @@ ClusterIcon.prototype.onAdd = function () {
     }
   });
 
+  google.maps.event.addDomListener(this.div_, "contextmenu", function(event) {
+        if (!cDraggingMapByCluster) {
+            var markerClusterer = cClusterIcon.cluster_.getMarkerClusterer();
+            google.maps.event.trigger(markerClusterer, "rightclick", cClusterIcon.cluster_, event);
+        }
+  });
+  
   google.maps.event.addDomListener(this.div_, "mouseover", function () {
     var mc = cClusterIcon.cluster_.getMarkerClusterer();
     /**
